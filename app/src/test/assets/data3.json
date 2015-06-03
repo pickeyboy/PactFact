@@ -1,0 +1,15 @@
+{
+  "title": "About Canada",
+  "rows": [
+    {
+      "title": null,
+      "description": null,
+      "imageHref": null
+    },
+    {
+      "title": "Flag",
+      "description": "Flag Description",
+      "imageHref": "http://images.findicons.com/files/icons/662/world_flag/128/flag_of_canada.png"
+    }
+  ]
+}
