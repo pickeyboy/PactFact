@@ -18,4 +18,5 @@
 
                 app/build/reports/tests/debug/index.html
 
-Unit testcases use jUnit framework and Robolectric and can be found in app/src/test/ folder. 
+Unit testcases are written using jUnit framework, mockito & Robolectric. 
+The same ccan be found in app/src/test/ folder. 
