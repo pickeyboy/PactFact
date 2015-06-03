@@ -10,5 +10,5 @@
 #	./gradlew testDebug
 #
 #
-# Pre-compiled test report can be found as below:
+# post-compiled test report can be found in the path below:
 # app/build/reports/tests/debug/index.html
