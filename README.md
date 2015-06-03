@@ -2,7 +2,8 @@
 
  This is Android Studio Gradle Project. Minimum SDK version configured is 14.
 
- There is no default signing key hence the app compile only on Debug mode as of now
+ There is no default signing key hence the app compiles for Debug mode only. 
+
  To build the app run following command 
 	
                 ./gradlew assembleDebug
@@ -16,3 +17,5 @@
  post-compiled test report can be found in the path below:
 
                 app/build/reports/tests/debug/index.html
+
+Unit testcases use jUnit framework and Robolectric and can be found in app/src/test/ folder. 
