@@ -10,7 +10,7 @@
 
  To run unit test cases run the following command from app folder
 	
-               ./gradlew testDebug
+               ./gradlew clean test
 
 
  post-compiled test report can be found in the path below:
