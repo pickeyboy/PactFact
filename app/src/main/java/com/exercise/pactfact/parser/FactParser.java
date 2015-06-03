@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import java.util.List;
 
 /**
+ * Json Data parser for PactFact data
+ * </p>
  * Created by aagrwal on 2/06/15.
  */
 public class FactParser
@@ -95,17 +97,27 @@ public class FactParser
                     rowTitle = BLANK_STR;
                 }
 
-                String description = getStringFromObject(rowJSON, Define.ROW_DESCRIPTION_TAG);
-                if (description == null || description.equals("null"))
+                String rowDesc = getStringFromObject(rowJSON, Define.ROW_DESCRIPTION_TAG);
+                if (rowDesc == null || rowDesc.equals("null"))
                 {
-                    description = BLANK_STR;
+                    rowDesc = BLANK_STR;
                 }
 
+                String rowImageHref = getStringFromObject(rowJSON, Define.ROW_IMAGEHREF_TAG);
+                if (rowImageHref == null || rowImageHref.equals("null"))
+                {
+                    rowImageHref = BLANK_STR;
+                }
+
+                if(rowTitle.isEmpty() && rowDesc.isEmpty() && rowImageHref.isEmpty())
+                {
+                    continue; //don't add the row as there is no data in it
+                }
                 FactModel factModel = new FactModel();
 
                 factModel.setTitle(rowTitle);
-                factModel.setDescription(description);
-                factModel.setImageHref(getStringFromObject(rowJSON, Define.ROW_IMAGEHREF_TAG));
+                factModel.setDescription(rowDesc);
+                factModel.setImageHref(rowImageHref);
                 dataList.add(factModel);
             }
             catch (JSONException e)

@@ -3,8 +3,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <ListView
+
+    <RelativeLayout
+        android:id="@+id/show_list_rl"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </ListView>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="MergeRootFrame">
+
+            <ListView
+                android:id="@+id/fact_list_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <TextView
+            android:id="@+id/error_message_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/no_internet"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
 </RelativeLayout>

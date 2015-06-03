@@ -5,4 +5,22 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="FactTitleBlue">
+        <item name="android:textColor">@android:color/holo_blue_dark</item>
+    </style>
+    <style name="FactDescriptionBlack">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+
+    <style name="FactTitleBlue.70px">
+        <item name="android:textSize">23sp</item>
+    </style>
+
+    <style name="FactDescriptionBlack.45px">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+
 </resources>

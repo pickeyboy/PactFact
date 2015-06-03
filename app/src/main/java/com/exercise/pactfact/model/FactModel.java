@@ -2,25 +2,23 @@ package com.exercise.pactfact.model;
 
 /**
  * Model class to store individual row data
- *
+ * <p/>
  * Created by aagrwal on 2/06/15.
  */
 public class FactModel
 {
-    public String mDescription;
-
-    public String mTitle;
-
-    public String mImageHref;
+    private String mDescription;
+    private String mTitle;
+    private String mImageHref;
 
     public String getDescription()
     {
         return mDescription;
     }
 
-    public void setDescription(String mDescription)
+    public void setDescription(String description)
     {
-        this.mDescription = mDescription;
+        mDescription = description;
     }
 
     public String getTitle()
@@ -28,9 +26,9 @@ public class FactModel
         return mTitle;
     }
 
-    public void setTitle(String mTitle)
+    public void setTitle(String title)
     {
-        this.mTitle = mTitle;
+        mTitle = title;
     }
 
     public String getImageHref()
@@ -38,8 +36,8 @@ public class FactModel
         return mImageHref;
     }
 
-    public void setImageHref(String mImageHref)
+    public void setImageHref(String imageHref)
     {
-        this.mImageHref = mImageHref;
+        mImageHref = imageHref;
     }
 }

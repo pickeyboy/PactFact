@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Test Class for {@link FactParser}
  * </p>
- * 
+ *
  * Created by aagrwal on 3/06/15.
  */
 
@@ -91,7 +91,7 @@ public class FactParserTest
 
         content = getContent(DataSet3);
         title = factParser.parseFactJsonData(content, factList);
-        assertThat(factList.size()).isEqualTo(2);
+        assertThat(factList.size()).isEqualTo(1);
         assertNotNull(title);
         assertThat(title.length()).isGreaterThan(0);
     }
