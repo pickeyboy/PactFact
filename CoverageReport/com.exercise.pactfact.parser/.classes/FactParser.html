@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FactParser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.exercise.pactfact.parser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FactParser (com.exercise.pactfact.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FactParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84%
+  </span>
+  <span class="absValue">
+    (42/ 50)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.exercise.pactfact.parser;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import android.support.annotation.NonNull;
+<i>4</i>&nbsp;import android.util.Log;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import com.exercise.pactfact.Define;
+<i>7</i>&nbsp;import com.exercise.pactfact.model.FactModel;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import org.json.JSONArray;
+<i>10</i>&nbsp;import org.json.JSONException;
+<i>11</i>&nbsp;import org.json.JSONObject;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import java.util.List;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;/**
+<i>16</i>&nbsp; * Json Data parser for PactFact data
+<i>17</i>&nbsp; * &lt;/p&gt;
+<i>18</i>&nbsp; * Created by aagrwal on 2/06/15.
+<i>19</i>&nbsp; */
+<b class="fc"><i>20</i>&nbsp;public class FactParser</b>
+<i>21</i>&nbsp;{
+<b class="fc"><i>22</i>&nbsp;    private static final String TAG = FactParser.class.getName();</b>
+<i>23</i>&nbsp;    private static final String BLANK_STR = &quot;&quot;;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    /**
+<i>26</i>&nbsp;     * Method to parse json raw data in to list and returns the Title
+<i>27</i>&nbsp;     *
+<i>28</i>&nbsp;     * @param jsonString The raw json data
+<i>29</i>&nbsp;     * @param dataList the List on which the data will be stored
+<i>30</i>&nbsp;     * @return Title of the data
+<i>31</i>&nbsp;     */
+<i>32</i>&nbsp;    public String parseFactJsonData(@NonNull String jsonString, @NonNull List&lt;FactModel&gt; dataList)
+<i>33</i>&nbsp;    {
+<b class="fc"><i>34</i>&nbsp;        String title = BLANK_STR;</b>
+<i>35</i>&nbsp;
+<b class="fc"><i>36</i>&nbsp;        if(jsonString == null || jsonString.isEmpty() || dataList == null)</b>
+<i>37</i>&nbsp;        {
+<b class="fc"><i>38</i>&nbsp;            Log.e(TAG, &quot;Json Data or the list to be populated should not be null&quot;);</b>
+<b class="fc"><i>39</i>&nbsp;            return title;</b>
+<i>40</i>&nbsp;        }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;        try
+<i>43</i>&nbsp;        {
+<b class="fc"><i>44</i>&nbsp;            JSONObject jsonObject = new JSONObject(jsonString);</b>
+<i>45</i>&nbsp;
+<b class="fc"><i>46</i>&nbsp;            if (jsonObject.has(Define.TITLE_TAG))</b>
+<i>47</i>&nbsp;            {
+<b class="fc"><i>48</i>&nbsp;                title = jsonObject.getString(Define.TITLE_TAG);</b>
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;                //If there is no title or title is null set it to Blank String
+<b class="fc"><i>51</i>&nbsp;                if (title == null || title.equals(&quot;null&quot;))</b>
+<i>52</i>&nbsp;                {
+<b class="fc"><i>53</i>&nbsp;                    title = BLANK_STR;</b>
+<i>54</i>&nbsp;                }
+<i>55</i>&nbsp;            }
+<i>56</i>&nbsp;
+<b class="fc"><i>57</i>&nbsp;            if (jsonObject.has(Define.ROWS_TAG))</b>
+<i>58</i>&nbsp;            {
+<b class="fc"><i>59</i>&nbsp;                JSONArray rows = jsonObject.getJSONArray(Define.ROWS_TAG);</b>
+<b class="fc"><i>60</i>&nbsp;                parseJsonRows(rows, dataList);</b>
+<i>61</i>&nbsp;            }
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;        }
+<b class="nc"><i>64</i>&nbsp;        catch (JSONException e)</b>
+<i>65</i>&nbsp;        {
+<b class="nc"><i>66</i>&nbsp;            Log.e(TAG, &quot;JSON Exception is caught ### &quot;, e);</b>
+<b class="fc"><i>67</i>&nbsp;        }</b>
+<b class="fc"><i>68</i>&nbsp;        return title;</b>
+<i>69</i>&nbsp;    }
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    /**
+<i>72</i>&nbsp;     * Method to parse individual rows
+<i>73</i>&nbsp;     * &lt;/p&gt;
+<i>74</i>&nbsp;     * @param rows JSONArray object of rows
+<i>75</i>&nbsp;     * @param dataList the list where the rows will be populated
+<i>76</i>&nbsp;     */
+<i>77</i>&nbsp;    private void parseJsonRows(@NonNull JSONArray rows, @NonNull List&lt;FactModel&gt; dataList)
+<i>78</i>&nbsp;    {
+<b class="fc"><i>79</i>&nbsp;        if(dataList == null || rows == null)</b>
+<i>80</i>&nbsp;        {
+<b class="nc"><i>81</i>&nbsp;            Log.e(TAG, &quot;Input params should not be null&quot;);</b>
+<b class="nc"><i>82</i>&nbsp;            return ;</b>
+<i>83</i>&nbsp;        }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;        //clear the data list
+<b class="fc"><i>86</i>&nbsp;        dataList.clear();</b>
+<i>87</i>&nbsp;
+<b class="fc"><i>88</i>&nbsp;        for (int i = 0; i &lt; rows.length(); i++)</b>
+<i>89</i>&nbsp;        {
+<i>90</i>&nbsp;            try
+<i>91</i>&nbsp;            {
+<b class="fc"><i>92</i>&nbsp;                JSONObject rowJSON = rows.getJSONObject(i);</b>
+<i>93</i>&nbsp;
+<b class="fc"><i>94</i>&nbsp;                String rowTitle = getStringFromObject(rowJSON, Define.ROW_TITLE_TAG);</b>
+<b class="fc"><i>95</i>&nbsp;                if (rowTitle == null || rowTitle.equals(&quot;null&quot;))</b>
+<i>96</i>&nbsp;                {
+<b class="fc"><i>97</i>&nbsp;                    rowTitle = BLANK_STR;</b>
+<i>98</i>&nbsp;                }
+<i>99</i>&nbsp;
+<b class="fc"><i>100</i>&nbsp;                String rowDesc = getStringFromObject(rowJSON, Define.ROW_DESCRIPTION_TAG);</b>
+<b class="fc"><i>101</i>&nbsp;                if (rowDesc == null || rowDesc.equals(&quot;null&quot;))</b>
+<i>102</i>&nbsp;                {
+<b class="fc"><i>103</i>&nbsp;                    rowDesc = BLANK_STR;</b>
+<i>104</i>&nbsp;                }
+<i>105</i>&nbsp;
+<b class="fc"><i>106</i>&nbsp;                String rowImageHref = getStringFromObject(rowJSON, Define.ROW_IMAGEHREF_TAG);</b>
+<b class="fc"><i>107</i>&nbsp;                if (rowImageHref == null || rowImageHref.equals(&quot;null&quot;))</b>
+<i>108</i>&nbsp;                {
+<b class="fc"><i>109</i>&nbsp;                    rowImageHref = BLANK_STR;</b>
+<i>110</i>&nbsp;                }
+<i>111</i>&nbsp;
+<b class="fc"><i>112</i>&nbsp;                if(rowTitle.isEmpty() &amp;&amp; rowDesc.isEmpty() &amp;&amp; rowImageHref.isEmpty())</b>
+<i>113</i>&nbsp;                {
+<b class="fc"><i>114</i>&nbsp;                    continue; //don&#39;t add the row as there is no data in it</b>
+<i>115</i>&nbsp;                }
+<b class="fc"><i>116</i>&nbsp;                FactModel factModel = new FactModel();</b>
+<i>117</i>&nbsp;
+<b class="fc"><i>118</i>&nbsp;                factModel.setTitle(rowTitle);</b>
+<b class="fc"><i>119</i>&nbsp;                factModel.setDescription(rowDesc);</b>
+<b class="fc"><i>120</i>&nbsp;                factModel.setImageHref(rowImageHref);</b>
+<b class="fc"><i>121</i>&nbsp;                dataList.add(factModel);</b>
+<i>122</i>&nbsp;            }
+<b class="nc"><i>123</i>&nbsp;            catch (JSONException e)</b>
+<i>124</i>&nbsp;            {
+<b class="nc"><i>125</i>&nbsp;                Log.e(TAG, &quot;JSON Exception is caught ####&quot;, e);</b>
+<b class="fc"><i>126</i>&nbsp;            }</b>
+<i>127</i>&nbsp;        }
+<b class="fc"><i>128</i>&nbsp;    }</b>
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    private String getStringFromObject(JSONObject rowJSON, String element)
+<i>131</i>&nbsp;    {
+<i>132</i>&nbsp;        try
+<i>133</i>&nbsp;        {
+<b class="fc"><i>134</i>&nbsp;            if (rowJSON.has(element))</b>
+<i>135</i>&nbsp;            {
+<b class="fc"><i>136</i>&nbsp;                return rowJSON.getString(element);</b>
+<i>137</i>&nbsp;            }
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;        }
+<b class="nc"><i>140</i>&nbsp;        catch (JSONException e)</b>
+<i>141</i>&nbsp;        {
+<b class="nc"><i>142</i>&nbsp;            Log.e(TAG, &quot;JSON Exception is caught ####&quot;, e);</b>
+<b class="fc"><i>143</i>&nbsp;        }</b>
+<b class="fc"><i>144</i>&nbsp;        return BLANK_STR;</b>
+<i>145</i>&nbsp;    }
+<i>146</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-04 13:41</div>
+</div>
+</body>
+</html>

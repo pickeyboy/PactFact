@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LruBitmapCache</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.exercise.pactfact.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LruBitmapCache (com.exercise.pactfact.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LruBitmapCache</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.9%
+  </span>
+  <span class="absValue">
+    (3/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    53.8%
+  </span>
+  <span class="absValue">
+    (7/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.exercise.pactfact.util;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import android.graphics.Bitmap;
+<i>4</i>&nbsp;import android.support.v4.util.LruCache;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import com.android.volley.toolbox.ImageLoader.ImageCache;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public class LruBitmapCache extends LruCache&lt;String, Bitmap&gt; implements ImageCache
+<i>9</i>&nbsp;{
+<i>10</i>&nbsp;    public static int getDefaultLruCacheSize()
+<i>11</i>&nbsp;    {
+<b class="fc"><i>12</i>&nbsp;        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);</b>
+<b class="fc"><i>13</i>&nbsp;        final int cacheSize = maxMemory / 8;</b>
+<i>14</i>&nbsp;
+<b class="fc"><i>15</i>&nbsp;        return cacheSize;</b>
+<i>16</i>&nbsp;    }
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    public LruBitmapCache()
+<i>19</i>&nbsp;    {
+<b class="fc"><i>20</i>&nbsp;        this(getDefaultLruCacheSize());</b>
+<b class="fc"><i>21</i>&nbsp;    }</b>
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public LruBitmapCache(int sizeInKiloBytes)
+<i>24</i>&nbsp;    {
+<b class="fc"><i>25</i>&nbsp;        super(sizeInKiloBytes);</b>
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public void clearCache()
+<i>29</i>&nbsp;    {
+<b class="nc"><i>30</i>&nbsp;        evictAll();</b>
+<b class="nc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Override
+<i>34</i>&nbsp;    protected int sizeOf(String key, Bitmap value)
+<i>35</i>&nbsp;    {
+<b class="nc"><i>36</i>&nbsp;        return value.getRowBytes() * value.getHeight() / 1024;</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @Override
+<i>40</i>&nbsp;    public Bitmap getBitmap(String url)
+<i>41</i>&nbsp;    {
+<b class="nc"><i>42</i>&nbsp;        return get(url);</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    @Override
+<i>46</i>&nbsp;    public void putBitmap(String url, Bitmap bitmap)
+<i>47</i>&nbsp;    {
+<b class="nc"><i>48</i>&nbsp;        put(url, bitmap);</b>
+<b class="nc"><i>49</i>&nbsp;    }</b>
+<i>50</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-04 13:41</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,348 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PactFactActivity</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.exercise.pactfact.activity</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PactFactActivity (com.exercise.pactfact.activity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PactFactActivity</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.8%
+  </span>
+  <span class="absValue">
+    (40/ 59)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PactFactActivity$$ViewInjector</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    58.3%
+  </span>
+  <span class="absValue">
+    (7/ 12)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PactFactActivity$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/ 6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PactFactActivity$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (10/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    61.2%
+  </span>
+  <span class="absValue">
+    (49/ 80)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.exercise.pactfact.activity;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import android.graphics.Color;
+<i>4</i>&nbsp;import android.os.Bundle;
+<i>5</i>&nbsp;import android.support.v4.widget.SwipeRefreshLayout;
+<i>6</i>&nbsp;import android.support.v7.app.ActionBar;
+<b class="nc"><i>7</i>&nbsp;import android.support.v7.app.ActionBarActivity;</b>
+<i>8</i>&nbsp;import android.util.Log;
+<i>9</i>&nbsp;import android.view.View;
+<b class="fc"><i>10</i>&nbsp;import android.widget.BaseAdapter;</b>
+<b class="fc"><i>11</i>&nbsp;import android.widget.ListView;</b>
+<b class="fc"><i>12</i>&nbsp;import android.widget.TextView;</b>
+<b class="fc"><i>13</i>&nbsp;</b>
+<b class="fc"><i>14</i>&nbsp;import com.android.volley.Cache;</b>
+<b class="fc"><i>15</i>&nbsp;import com.android.volley.Request;</b>
+<b class="fc"><i>16</i>&nbsp;import com.android.volley.RequestQueue;</b>
+<i>17</i>&nbsp;import com.android.volley.Response;
+<i>18</i>&nbsp;import com.android.volley.VolleyError;
+<b class="nc"><i>19</i>&nbsp;import com.android.volley.toolbox.JsonObjectRequest;</b>
+<b class="nc"><i>20</i>&nbsp;import com.exercise.pactfact.Define;</b>
+<b class="nc"><i>21</i>&nbsp;import com.exercise.pactfact.R;</b>
+<b class="nc"><i>22</i>&nbsp;import com.exercise.pactfact.adapter.FactListAdapter;</b>
+<i>23</i>&nbsp;import com.exercise.pactfact.model.FactModel;
+<i>24</i>&nbsp;import com.exercise.pactfact.parser.FactParser;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;import org.json.JSONObject;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;import java.io.IOException;
+<i>29</i>&nbsp;import java.util.ArrayList;
+<i>30</i>&nbsp;import java.util.List;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;import butterknife.ButterKnife;
+<i>33</i>&nbsp;import butterknife.InjectView;
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;
+<b class="fc"><i>36</i>&nbsp;public class PactFactActivity extends ActionBarActivity implements SwipeRefreshLayout.OnRefreshListener</b>
+<i>37</i>&nbsp;{
+<b class="fc"><i>38</i>&nbsp;    private static final String TAG = PactFactActivity.class.getName();</b>
+<i>39</i>&nbsp;    private String mActionBarTitle;
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    RequestQueue mRequestQueue;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    @InjectView(R.id.fact_list_lv)
+<i>44</i>&nbsp;    ListView mFactListViewLv;
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    @InjectView(R.id.swipe_refresh)
+<i>47</i>&nbsp;    SwipeRefreshLayout mSwipeRefreshLayout;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    @InjectView(R.id.error_message_tv)
+<i>50</i>&nbsp;    TextView mErrorMessageTv;
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    List&lt;FactModel&gt; mFactDataList;
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    @Override
+<i>55</i>&nbsp;    protected void onCreate(Bundle savedInstanceState)
+<i>56</i>&nbsp;    {
+<b class="fc"><i>57</i>&nbsp;        super.onCreate(savedInstanceState);</b>
+<b class="fc"><i>58</i>&nbsp;        setContentView(R.layout.activity_pact_fact);</b>
+<b class="fc"><i>59</i>&nbsp;        ButterKnife.inject(this);</b>
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;        //Instantiate a new blank list
+<b class="fc"><i>62</i>&nbsp;        mFactDataList = new ArrayList&lt;&gt;();</b>
+<i>63</i>&nbsp;
+<b class="fc"><i>64</i>&nbsp;        mActionBarTitle = getResources().getString(R.string.loading_msg);</b>
+<b class="fc"><i>65</i>&nbsp;        setActionBarTitle(mActionBarTitle);</b>
+<i>66</i>&nbsp;
+<b class="fc"><i>67</i>&nbsp;        mSwipeRefreshLayout.setOnRefreshListener(this);</b>
+<b class="fc"><i>68</i>&nbsp;        mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.pull_to_refresh_background));</b>
+<b class="fc"><i>69</i>&nbsp;        mSwipeRefreshLayout.setColorSchemeColors(Color.WHITE);</b>
+<i>70</i>&nbsp;
+<b class="fc"><i>71</i>&nbsp;        mFactListViewLv.setAdapter(new FactListAdapter(mFactDataList));</b>
+<b class="fc"><i>72</i>&nbsp;        mRequestQueue = AppController.getInstance().getRequestQueue();</b>
+<i>73</i>&nbsp;
+<b class="fc"><i>74</i>&nbsp;        if (!AppController.getInstance().isDataConnAvailable())</b>
+<i>75</i>&nbsp;        {
+<b class="nc"><i>76</i>&nbsp;            showErrorLayout();</b>
+<b class="nc"><i>77</i>&nbsp;            return;</b>
+<i>78</i>&nbsp;        }
+<b class="fc"><i>79</i>&nbsp;        loadData();</b>
+<b class="fc"><i>80</i>&nbsp;    }</b>
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    @Override
+<i>83</i>&nbsp;    public void onRefresh()
+<i>84</i>&nbsp;    {
+<b class="fc"><i>85</i>&nbsp;        mFactDataList.clear();</b>
+<b class="fc"><i>86</i>&nbsp;        ((BaseAdapter) mFactListViewLv.getAdapter()).notifyDataSetChanged();</b>
+<i>87</i>&nbsp;
+<b class="fc"><i>88</i>&nbsp;        if (!AppController.getInstance().isDataConnAvailable())</b>
+<i>89</i>&nbsp;        {
+<b class="fc"><i>90</i>&nbsp;            showErrorLayout();</b>
+<b class="fc"><i>91</i>&nbsp;            return;</b>
+<i>92</i>&nbsp;        }
+<i>93</i>&nbsp;
+<b class="nc"><i>94</i>&nbsp;        setActionBarTitle(getResources().getString(R.string.loading_msg));</b>
+<b class="nc"><i>95</i>&nbsp;        AppController.getInstance().getLruBitmapCache().clearCache();</b>
+<b class="nc"><i>96</i>&nbsp;        mRequestQueue.cancelAll(TAG);</b>
+<b class="nc"><i>97</i>&nbsp;        mRequestQueue.getCache().clear();</b>
+<i>98</i>&nbsp;
+<b class="nc"><i>99</i>&nbsp;        loadData();</b>
+<b class="nc"><i>100</i>&nbsp;        mErrorMessageTv.setVisibility(View.INVISIBLE);</b>
+<b class="nc"><i>101</i>&nbsp;    }</b>
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    /**
+<i>104</i>&nbsp;     * Download data from network by adding request in volley request queue
+<i>105</i>&nbsp;     * and populate data list
+<i>106</i>&nbsp;     */
+<i>107</i>&nbsp;    private void loadData()
+<i>108</i>&nbsp;    {
+<b class="fc"><i>109</i>&nbsp;        final FactParser parser = new FactParser();</b>
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;        // We first check for cached request
+<b class="fc"><i>112</i>&nbsp;        Cache cache = mRequestQueue.getCache();</b>
+<b class="fc"><i>113</i>&nbsp;        Cache.Entry entry = cache.get(Define.URL_FEED);</b>
+<b class="fc"><i>114</i>&nbsp;        if (entry != null)</b>
+<i>115</i>&nbsp;        {
+<i>116</i>&nbsp;            // fetch the data from cache
+<i>117</i>&nbsp;            try
+<i>118</i>&nbsp;            {
+<b class="nc"><i>119</i>&nbsp;                String data = new String(entry.data, &quot;UTF-8&quot;);</b>
+<b class="nc"><i>120</i>&nbsp;                mActionBarTitle = parser.parseFactJsonData(data, mFactDataList);</b>
+<b class="nc"><i>121</i>&nbsp;                dataLoaded();</b>
+<i>122</i>&nbsp;            }
+<b class="nc"><i>123</i>&nbsp;            catch (IOException e)</b>
+<i>124</i>&nbsp;            {
+<b class="nc"><i>125</i>&nbsp;                Log.d(TAG, &quot;Error parsing data&quot;, e);</b>
+<b class="nc"><i>126</i>&nbsp;            }</b>
+<i>127</i>&nbsp;        }
+<i>128</i>&nbsp;        else
+<i>129</i>&nbsp;        {
+<b class="fc"><i>130</i>&nbsp;            Response.Listener&lt;JSONObject&gt; responseListener = new Response.Listener&lt;JSONObject&gt;()</b>
+<b class="fc"><i>131</i>&nbsp;            {</b>
+<i>132</i>&nbsp;                @Override
+<i>133</i>&nbsp;                public void onResponse(JSONObject response)
+<i>134</i>&nbsp;                {
+<b class="nc"><i>135</i>&nbsp;                    Log.d(TAG, &quot;Volley Response: &quot; + response.toString());</b>
+<b class="nc"><i>136</i>&nbsp;                    if (response != null)</b>
+<i>137</i>&nbsp;                    {
+<b class="nc"><i>138</i>&nbsp;                        mActionBarTitle = parser.parseFactJsonData(response.toString(), mFactDataList);</b>
+<b class="nc"><i>139</i>&nbsp;                        dataLoaded();</b>
+<i>140</i>&nbsp;                    }
+<b class="nc"><i>141</i>&nbsp;                }</b>
+<i>142</i>&nbsp;            };
+<i>143</i>&nbsp;
+<b class="fc"><i>144</i>&nbsp;            Response.ErrorListener errorListener = new Response.ErrorListener()</b>
+<b class="fc"><i>145</i>&nbsp;            {</b>
+<i>146</i>&nbsp;                @Override
+<i>147</i>&nbsp;                public void onErrorResponse(VolleyError error)
+<i>148</i>&nbsp;                {
+<b class="nc"><i>149</i>&nbsp;                    Log.e(TAG, &quot;Error: &quot; + error.getMessage());</b>
+<b class="nc"><i>150</i>&nbsp;                }</b>
+<i>151</i>&nbsp;            };
+<i>152</i>&nbsp;
+<b class="fc"><i>153</i>&nbsp;            JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET,</b>
+<i>154</i>&nbsp;                    Define.URL_FEED, responseListener, errorListener);
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;            //Setting TAG if in future request needs to be cancelled.
+<b class="fc"><i>157</i>&nbsp;            jsonReq.setTag(TAG);</b>
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;            // Adding request to volley request queue
+<b class="fc"><i>160</i>&nbsp;            mRequestQueue.add(jsonReq);</b>
+<i>161</i>&nbsp;        }
+<b class="fc"><i>162</i>&nbsp;    }</b>
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;    /**
+<i>165</i>&nbsp;     * Does the operation once data is loaded from network and parsed.
+<i>166</i>&nbsp;     */
+<i>167</i>&nbsp;    private void dataLoaded()
+<i>168</i>&nbsp;    {
+<b class="nc"><i>169</i>&nbsp;        setActionBarTitle(mActionBarTitle);</b>
+<b class="nc"><i>170</i>&nbsp;        ((BaseAdapter) mFactListViewLv.getAdapter()).notifyDataSetChanged();</b>
+<b class="nc"><i>171</i>&nbsp;        mSwipeRefreshLayout.setRefreshing(false);</b>
+<b class="nc"><i>172</i>&nbsp;    }</b>
+<i>173</i>&nbsp;
+<i>174</i>&nbsp;    /**
+<i>175</i>&nbsp;     * Sets Action bar title.
+<i>176</i>&nbsp;     * &lt;/p&gt;
+<i>177</i>&nbsp;     *
+<i>178</i>&nbsp;     * @param title Title String
+<i>179</i>&nbsp;     */
+<i>180</i>&nbsp;    private void setActionBarTitle(String title)
+<i>181</i>&nbsp;    {
+<b class="fc"><i>182</i>&nbsp;        ActionBar actionBar = this.getSupportActionBar();</b>
+<i>183</i>&nbsp;
+<b class="fc"><i>184</i>&nbsp;        if (actionBar != null &amp;&amp; title != null)</b>
+<i>185</i>&nbsp;        {
+<b class="fc"><i>186</i>&nbsp;            actionBar.setTitle(title);</b>
+<i>187</i>&nbsp;        }
+<b class="fc"><i>188</i>&nbsp;    }</b>
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;    /**
+<i>191</i>&nbsp;     * Display error message layout
+<i>192</i>&nbsp;     */
+<i>193</i>&nbsp;    public void showErrorLayout()
+<i>194</i>&nbsp;    {
+<b class="fc"><i>195</i>&nbsp;        mErrorMessageTv.setVisibility(View.VISIBLE);</b>
+<b class="fc"><i>196</i>&nbsp;        mErrorMessageTv.setText(getResources().getString(R.string.no_internet));</b>
+<b class="fc"><i>197</i>&nbsp;        mSwipeRefreshLayout.setRefreshing(false);</b>
+<b class="fc"><i>198</i>&nbsp;        setActionBarTitle(getResources().getString(R.string.loading_failed));</b>
+<b class="fc"><i>199</i>&nbsp;    }</b>
+<i>200</i>&nbsp;
+<i>201</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-04 13:41</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FactListAdapter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.exercise.pactfact.adapter</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FactListAdapter (com.exercise.pactfact.adapter)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FactListAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/ 23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FactListAdapter$ListItemViewHolder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (24/ 24)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.exercise.pactfact.adapter;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import android.view.LayoutInflater;
+<i>4</i>&nbsp;import android.view.View;
+<i>5</i>&nbsp;import android.view.ViewGroup;
+<i>6</i>&nbsp;import android.widget.BaseAdapter;
+<i>7</i>&nbsp;import android.widget.TextView;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import com.android.volley.toolbox.NetworkImageView;
+<i>10</i>&nbsp;import com.exercise.pactfact.R;
+<i>11</i>&nbsp;import com.exercise.pactfact.activity.AppController;
+<i>12</i>&nbsp;import com.exercise.pactfact.model.FactModel;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;import java.util.List;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;import butterknife.ButterKnife;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;/**
+<i>19</i>&nbsp; * Adapter class for ListView
+<i>20</i>&nbsp; * &lt;/p&gt;
+<i>21</i>&nbsp; * Created by aagrwal on 3/06/15.
+<i>22</i>&nbsp; */
+<i>23</i>&nbsp;public class FactListAdapter extends BaseAdapter
+<i>24</i>&nbsp;{
+<i>25</i>&nbsp;    List&lt;FactModel&gt; mFactModelList;
+<i>26</i>&nbsp;    ListItemViewHolder mListItemViewHolder;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public FactListAdapter(List&lt;FactModel&gt; list)
+<b class="fc"><i>29</i>&nbsp;    {</b>
+<b class="fc"><i>30</i>&nbsp;        mFactModelList = list;</b>
+<b class="fc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Override
+<i>34</i>&nbsp;    public int getCount()
+<i>35</i>&nbsp;    {
+<b class="fc"><i>36</i>&nbsp;        return mFactModelList.size();</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @Override
+<i>40</i>&nbsp;    public Object getItem(int position)
+<i>41</i>&nbsp;    {
+<b class="fc"><i>42</i>&nbsp;        if(position &lt; 0 || position &gt; mFactModelList.size())</b>
+<i>43</i>&nbsp;        {
+<b class="fc"><i>44</i>&nbsp;            return null;</b>
+<i>45</i>&nbsp;        }
+<b class="fc"><i>46</i>&nbsp;        return mFactModelList.get(position);</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    @Override
+<i>50</i>&nbsp;    public long getItemId(int position)
+<i>51</i>&nbsp;    {
+<b class="fc"><i>52</i>&nbsp;        return position;</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    @Override
+<i>56</i>&nbsp;    public View getView(int position, View convertView, ViewGroup parent)
+<i>57</i>&nbsp;    {
+<b class="fc"><i>58</i>&nbsp;        if(convertView == null)</b>
+<i>59</i>&nbsp;        {
+<b class="fc"><i>60</i>&nbsp;            LayoutInflater inflater = LayoutInflater.from(parent.getContext());</b>
+<b class="fc"><i>61</i>&nbsp;            convertView = inflater.inflate(R.layout.fact_item, parent, false);</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;        }
+<i>64</i>&nbsp;
+<b class="fc"><i>65</i>&nbsp;        mListItemViewHolder = (ListItemViewHolder) convertView.getTag();</b>
+<b class="fc"><i>66</i>&nbsp;        if(mListItemViewHolder == null)</b>
+<i>67</i>&nbsp;        {
+<b class="fc"><i>68</i>&nbsp;            mListItemViewHolder = new ListItemViewHolder();</b>
+<b class="fc"><i>69</i>&nbsp;            mListItemViewHolder.rowTitle = ButterKnife.findById(convertView, R.id.fact_row_title_tv);</b>
+<b class="fc"><i>70</i>&nbsp;            mListItemViewHolder.rowDescription = ButterKnife.findById(convertView, R.id.fact_row_desc_tv);</b>
+<b class="fc"><i>71</i>&nbsp;            mListItemViewHolder.rowImage = ButterKnife.findById(convertView, R.id.fact_row_image_iv);</b>
+<b class="fc"><i>72</i>&nbsp;            convertView.setTag(mListItemViewHolder);</b>
+<i>73</i>&nbsp;        }
+<i>74</i>&nbsp;
+<b class="fc"><i>75</i>&nbsp;        mListItemViewHolder.rowTitle.setText(mFactModelList.get(position).getTitle());</b>
+<b class="fc"><i>76</i>&nbsp;        mListItemViewHolder.rowDescription.setText(mFactModelList.get(position).getDescription());</b>
+<b class="fc"><i>77</i>&nbsp;        mListItemViewHolder.rowImage.setImageUrl(mFactModelList.get(position).getImageHref(),</b>
+<b class="fc"><i>78</i>&nbsp;                AppController.getInstance().getImageLoader());</b>
+<i>79</i>&nbsp;
+<b class="fc"><i>80</i>&nbsp;        return convertView;</b>
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<b class="fc"><i>83</i>&nbsp;    public class ListItemViewHolder</b>
+<i>84</i>&nbsp;    {
+<i>85</i>&nbsp;        public TextView rowTitle;
+<i>86</i>&nbsp;        public TextView rowDescription;
+<i>87</i>&nbsp;        public NetworkImageView rowImage;
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-06-04 13:41</div>
+</div>
+</body>
+</html>
